@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
@@ -33,3 +34,30 @@ function App() {
 }
 
 export default App
+=======
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+import WelcomeMessage from "./components/WelcomeMessage";
+import Header from "./components/Header";
+import MainContent from "./components/MainContent";
+import Footer from "./components/Footer";
+import UserProfile from "./components/UserProfile";
+
+function App() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <>
+      <Header />
+      <MainContent />
+      <Footer />
+      <WelcomeMessage />
+      <UserProfile name="Alice" age="25" bio="Loves hiking and photography" />
+    </>
+  );
+}
+
+export default App;
+>>>>>>> 87e4df346cefc595e001c736dd435b99e9490af6
