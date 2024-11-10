@@ -4,7 +4,9 @@ const Footer = () => {
   return (
     <>
       <footer>
-        <p>© 2023 City Lovers</p>
+        <p style={{ align: "center", font: "extralight", fontFamily: "serif" }}>
+          © 2023 City Lovers
+        </p>
       </footer>
     </>
   );
