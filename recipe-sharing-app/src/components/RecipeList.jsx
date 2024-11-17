@@ -10,7 +10,6 @@ const RecipeList = () => {
       {filteredRecipes.length > 0 ? (
         filteredRecipes.map((recipe) => (
           <div key={recipe.id}>
-            {/* Use Link to navigate to the RecipeDetails page */}
             <h3>
               <Link to={`/recipes/${recipe.id}`}>{recipe.title}</Link>
             </h3>
