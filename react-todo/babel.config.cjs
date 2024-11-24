@@ -1,6 +1,7 @@
+// babel.config.cjs
 module.exports = {
   presets: [
-    "@babel/preset-env", // for modern JavaScript
-    "@babel/preset-react", // for JSX and React syntax
+    '@babel/preset-env',
+    '@babel/preset-react',
   ],
 };
