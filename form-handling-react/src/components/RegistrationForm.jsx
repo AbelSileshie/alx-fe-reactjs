@@ -9,7 +9,7 @@ import {
 
 export default function RegistrationForm() {
   const [formData, setFormData] = useState({
-    name: "",
+    username: "",
     email: "",
     password: "",
     termsAccepted: false,
@@ -17,19 +17,19 @@ export default function RegistrationForm() {
   const [error, setError] = useState("");
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { username, value, type, checked } = e.target;
     setFormData({
       ...formData,
-      [name]: type === "checkbox" ? checked : value,
+      [username]: type === "checkbox" ? checked : value,
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const { name, email, password, termsAccepted } = formData;
+    const { username, email, password, termsAccepted } = formData;
 
-    if (!name || !email || !password) {
+    if (!username || !email || !password) {
       setError("All fields are required!");
       return;
     }
@@ -63,8 +63,8 @@ export default function RegistrationForm() {
           <Input
             size="lg"
             placeholder="John Doe"
-            name="name"
-            value={formData.name}
+            username="name"
+            value={formData.username}
             onChange={handleChange}
             className="!border-t-blue-gray-200 focus:!border-t-gray-900"
             labelProps={{
