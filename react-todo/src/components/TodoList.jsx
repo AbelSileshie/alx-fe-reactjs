@@ -1,8 +1,6 @@
-// src/components/TodoList.jsx
 import React, { useState } from "react";
 
 const TodoList = () => {
-  // Initial state with some sample todos
   const [todos, setTodos] = useState([
     { id: 1, text: "Learn React", completed: false },
     { id: 2, text: "Build a Todo App", completed: false },
@@ -11,19 +9,17 @@ const TodoList = () => {
 
   const [newTodo, setNewTodo] = useState("");
 
-  // Add a new todo
   const addTodo = () => {
-    if (newTodo.trim() === "") return; // Prevent adding empty todos
+    if (newTodo.trim() === "") return;
     const newTodoItem = {
-      id: Date.now(), // Generate a unique ID
+      id: Date.now(),
       text: newTodo,
       completed: false,
     };
     setTodos((prevTodos) => [...prevTodos, newTodoItem]);
-    setNewTodo(""); // Clear the input
+    setNewTodo("");
   };
 
-  // Toggle the completion status of a todo
   const toggleTodo = (id) => {
     setTodos((prevTodos) =>
       prevTodos.map((todo) =>
@@ -32,7 +28,6 @@ const TodoList = () => {
     );
   };
 
-  // Delete a todo
   const deleteTodo = (id) => {
     setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
   };
@@ -43,7 +38,6 @@ const TodoList = () => {
         Todo List
       </h1>
 
-      {/* Add Todo Form */}
       <div className="add-todo-form mb-6 flex">
         <input
           type="text"
@@ -60,7 +54,6 @@ const TodoList = () => {
         </button>
       </div>
 
-      {/* Display Todo List */}
       <ul className="todo-list list-none space-y-3">
         {todos.map((todo) => (
           <li
@@ -77,7 +70,7 @@ const TodoList = () => {
             </span>
             <button
               onClick={(e) => {
-                e.stopPropagation(); // Prevent triggering toggle
+                e.stopPropagation();
                 deleteTodo(todo.id);
               }}
               className="ml-4 px-3 py-1 text-red-500 hover:text-red-700 transition"

@@ -25,22 +25,33 @@ describe("TodoList Component", () => {
   });
 
   test("toggles the completion status of a todo", () => {
-    render(<TodoList />);
+    const todos = [{ id: 1, text: "Learn React", completed: false }];
+    const toggleTodo = jest.fn((id) => {
+      todos[0].completed = !todos[0].completed;
+    });
+
+    render(<TodoList todos={todos} onToggle={toggleTodo} />);
 
     const todoItem = screen.getByText("Learn React");
 
     fireEvent.click(todoItem);
 
-    expect(todoItem).toHaveClass("line-through");
+    expect(toggleTodo).toHaveBeenCalledWith(1);
+
+    todos[0].completed = true;
+    render(<TodoList todos={todos} onToggle={toggleTodo} />);
+
+    const updatedTodoItem = screen.getByText("Learn React");
+    expect(updatedTodoItem).toHaveClass("completed");
   });
 
   test("deletes a todo item", () => {
     render(<TodoList />);
 
-    const deleteButton = screen.getAllByText("Delete")[0];
+    const deleteButtons = screen.getAllByText("Delete");
     const todoItem = screen.getByText("Learn React");
 
-    fireEvent.click(deleteButton);
+    fireEvent.click(deleteButtons[0]);
 
     expect(todoItem).not.toBeInTheDocument();
   });
