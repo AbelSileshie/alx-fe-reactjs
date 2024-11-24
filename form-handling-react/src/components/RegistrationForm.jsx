@@ -22,11 +22,30 @@ export default function RegistrationForm() {
     if (name === "termsAccepted") setTermsAccepted(checked);
   };
 
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(String(email).toLowerCase());
+  };
+
+  const validatePassword = (password) => {
+    return password.length >= 8;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!username || !email || !password) {
       setError("All fields are required!");
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setError("Invalid email format.");
+      return;
+    }
+
+    if (!validatePassword(password)) {
+      setError("Password must be at least 8 characters long.");
       return;
     }
 
