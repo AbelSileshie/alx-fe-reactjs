@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Typography } from "@material-tailwind/react";
+import { Typography, Button } from "@material-tailwind/react";
 
 const fetchPosts = async () => {
   const response = await fetch("https://jsonplaceholder.typicode.com/posts");
@@ -11,7 +11,7 @@ const fetchPosts = async () => {
 };
 
 const PostsComponent = () => {
-  const { data, error, isLoading, isError } = useQuery({
+  const { data, error, isLoading, isError, refetch } = useQuery({
     queryKey: ["posts"],
     queryFn: fetchPosts,
     cacheTime: 1000 * 60 * 5, // 5 minutes
@@ -31,6 +31,7 @@ const PostsComponent = () => {
   return (
     <div>
       <h1>Posts</h1>
+      <Button onClick={() => refetch()}>Refetch Posts</Button>
       <ul>
         {data.map((post) => (
           <p key={post.id}>
