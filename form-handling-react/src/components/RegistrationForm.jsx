@@ -8,26 +8,22 @@ import {
 } from "@material-tailwind/react";
 
 export default function RegistrationForm() {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-    termsAccepted: false,
-  });
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [termsAccepted, setTermsAccepted] = useState(false);
   const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === "checkbox" ? checked : value,
-    });
+    if (name === "username") setUsername(value);
+    if (name === "email") setEmail(value);
+    if (name === "password") setPassword(value);
+    if (name === "termsAccepted") setTermsAccepted(checked);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const { username, email, password, termsAccepted } = formData;
 
     if (!username || !email || !password) {
       setError("All fields are required!");
@@ -40,8 +36,19 @@ export default function RegistrationForm() {
     }
 
     setError("");
-    console.log("Form Submitted Successfully!", formData);
+    console.log("Form Submitted Successfully!", {
+      username,
+      email,
+      password,
+      termsAccepted,
+    });
     // Handle form submission logic here
+
+    // Reset form fields after successful submission
+    setUsername("");
+    setEmail("");
+    setPassword("");
+    setTermsAccepted(false);
   };
 
   return (
@@ -64,7 +71,7 @@ export default function RegistrationForm() {
             size="lg"
             placeholder="John Doe"
             name="username"
-            value={formData.username}
+            value={username}
             onChange={handleChange}
             className="!border-t-blue-gray-200 focus:!border-t-gray-900"
             labelProps={{
@@ -78,7 +85,7 @@ export default function RegistrationForm() {
             size="lg"
             placeholder="name@mail.com"
             name="email"
-            value={formData.email}
+            value={email}
             onChange={handleChange}
             className="!border-t-blue-gray-200 focus:!border-t-gray-900"
             labelProps={{
@@ -93,7 +100,7 @@ export default function RegistrationForm() {
             size="lg"
             placeholder="********"
             name="password"
-            value={formData.password}
+            value={password}
             onChange={handleChange}
             className="!border-t-blue-gray-200 focus:!border-t-gray-900"
             labelProps={{
@@ -103,7 +110,7 @@ export default function RegistrationForm() {
         </div>
         <Checkbox
           name="termsAccepted"
-          checked={formData.termsAccepted}
+          checked={termsAccepted}
           onChange={handleChange}
           label={
             <Typography
