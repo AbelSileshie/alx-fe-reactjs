@@ -5,8 +5,7 @@ import Profile from "./components/Profile";
 import Login from "./components/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 
-const isAuthenticated = false; // Simulate authentication status
-git;
+const isAuthenticated = false; // Simulate authentication statusj
 const App = () => {
   return (
     <BrowserRouter>
