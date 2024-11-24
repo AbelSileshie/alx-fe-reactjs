@@ -14,6 +14,10 @@ const PostsComponent = () => {
   const { data, error, isLoading, isError } = useQuery({
     queryKey: ["posts"],
     queryFn: fetchPosts,
+    cacheTime: 1000 * 60 * 5, // 5 minutes
+    staleTime: 1000 * 60 * 1, // 1 minute
+    refetchOnWindowFocus: false,
+    keepPreviousData: true,
   });
 
   if (isLoading) {
@@ -30,10 +34,10 @@ const PostsComponent = () => {
       <ul>
         {data.map((post) => (
           <p key={post.id}>
-            <Typography variant="h1" className=" capitalize">
+            <Typography variant="h1" className="capitalize">
               {post.title}
             </Typography>
-            <Typography variant="lead" className=" font-serif capitalize">
+            <Typography variant="lead" className="font-serif capitalize">
               {post.body}
             </Typography>
           </p>
