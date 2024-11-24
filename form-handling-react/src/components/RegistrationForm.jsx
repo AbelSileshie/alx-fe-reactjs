@@ -17,10 +17,10 @@ export default function RegistrationForm() {
   const [error, setError] = useState("");
 
   const handleChange = (e) => {
-    const { username, value, type, checked } = e.target;
+    const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
-      [username]: type === "checkbox" ? checked : value,
+      [name]: type === "checkbox" ? checked : value,
     });
   };
 
@@ -63,7 +63,7 @@ export default function RegistrationForm() {
           <Input
             size="lg"
             placeholder="John Doe"
-            username="name"
+            name="username"
             value={formData.username}
             onChange={handleChange}
             className="!border-t-blue-gray-200 focus:!border-t-gray-900"
