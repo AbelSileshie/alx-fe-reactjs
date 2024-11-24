@@ -1,41 +1,16 @@
 import React from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-
-const validationSchema = Yup.object().shape({
-  username: Yup.string().required("Username is required"),
-  email: Yup.string()
-    .email("Invalid email address")
-    .required("Email is required"),
-  password: Yup.string()
-    .min(6, "Password must be at least 6 characters")
-    .required("Password is required"),
-  termsAccepted: Yup.bool().oneOf(
-    [true],
-    "You must accept the terms and conditions"
-  ),
-});
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import { validationSchema, initialValues, handleSubmit } from "./FormikForm"; // Import validation and functions
 
 const FormikForm = () => {
-  const initialValues = {
-    username: "",
-    email: "",
-    password: "",
-    termsAccepted: false,
-  };
-
-  const handleSubmit = (values) => {
-    console.log("Form submitted successfully!", values);
-    // Handle form submission logic here
-  };
-
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={handleSubmit}
-    >
-      {() => (
+    <div className="form-container">
+      <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
         <Form className="p-6 bg-white shadow-md rounded w-80 mx-auto">
           <div className="mb-4">
             <label
@@ -121,8 +96,8 @@ const FormikForm = () => {
             Register
           </button>
         </Form>
-      )}
-    </Formik>
+      </Formik>
+    </div>
   );
 };
 
