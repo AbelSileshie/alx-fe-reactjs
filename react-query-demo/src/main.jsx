@@ -1,14 +1,13 @@
 // src/main.jsx
 import React from "react";
-import { createRoot } from "react-dom/client";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import ReactDOM from "react-dom/client";
 import App from "./App";
+import { ThemeProvider } from "@material-tailwind/react";
 
-// Create a client instance for React Query
-const queryClient = new QueryClient();
-
-createRoot(document.getElementById("root")).render(
-  <QueryClientProvider client={queryClient}>
-    <App />
-  </QueryClientProvider>
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
+  </React.StrictMode>
 );

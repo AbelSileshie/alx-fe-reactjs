@@ -1,6 +1,6 @@
-// PostsComponent.jsx
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
+import { Typography } from "@material-tailwind/react";
 
 const fetchPosts = async () => {
   const response = await fetch("https://jsonplaceholder.typicode.com/posts");
@@ -29,10 +29,14 @@ const PostsComponent = () => {
       <h1>Posts</h1>
       <ul>
         {data.map((post) => (
-          <li key={post.id}>
-            <h3>{post.title}</h3>
-            <p>{post.body}</p>
-          </li>
+          <p key={post.id}>
+            <Typography variant="h1" className=" capitalize">
+              {post.title}
+            </Typography>
+            <Typography variant="lead" className=" font-serif capitalize">
+              {post.body}
+            </Typography>
+          </p>
         ))}
       </ul>
     </div>
