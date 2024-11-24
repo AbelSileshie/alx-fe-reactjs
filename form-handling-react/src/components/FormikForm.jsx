@@ -1,6 +1,6 @@
 import React from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import { validationSchema, initialValues, handleSubmit } from "./FormikForm"; // Import validation and functions
+import { validationSchema, initialValues, handleSubmit } from "./formikForm"; // Import validation and functions
 
 const FormikForm = () => {
   return (
