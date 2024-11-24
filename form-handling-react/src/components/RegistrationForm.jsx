@@ -48,9 +48,6 @@ export default function RegistrationForm() {
       setError("Password is required!");
       return;
     }
-      setError("All fields are required!");
-      return;
-    }
 
     if (!validateEmail(email)) {
       setError("Invalid email format.");
