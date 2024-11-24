@@ -12,7 +12,7 @@ export default function RegistrationForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [termsAccepted, setTermsAccepted] = useState(false);
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value, checked } = e.target;
@@ -33,38 +33,34 @@ export default function RegistrationForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const newErrors = {};
 
     if (!username) {
-      setError("Username is required!");
-      return;
+      newErrors.username = "Username is required!";
     }
 
     if (!email) {
-      setError("Email is required!");
-      return;
+      newErrors.email = "Email is required!";
+    } else if (!validateEmail(email)) {
+      newErrors.email = "Invalid email format.";
     }
 
     if (!password) {
-      setError("Password is required!");
-      return;
-    }
-
-    if (!validateEmail(email)) {
-      setError("Invalid email format.");
-      return;
-    }
-
-    if (!validatePassword(password)) {
-      setError("Password must be at least 8 characters long.");
-      return;
+      newErrors.password = "Password is required!";
+    } else if (!validatePassword(password)) {
+      newErrors.password = "Password must be at least 8 characters long.";
     }
 
     if (!termsAccepted) {
-      setError("You must accept the terms and conditions.");
+      newErrors.termsAccepted = "You must accept the terms and conditions.";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
       return;
     }
 
-    setError("");
+    setErrors({});
     console.log("Form Submitted Successfully!", {
       username,
       email,
@@ -107,6 +103,9 @@ export default function RegistrationForm() {
               className: "before:content-none after:content-none",
             }}
           />
+          {errors.username && (
+            <p className="text-red-500 text-sm mt-2">{errors.username}</p>
+          )}
           <Typography variant="h6" color="blue-gray" className="-mb-3">
             Your Email
           </Typography>
@@ -121,6 +120,9 @@ export default function RegistrationForm() {
               className: "before:content-none after:content-none",
             }}
           />
+          {errors.email && (
+            <p className="text-red-500 text-sm mt-2">{errors.email}</p>
+          )}
           <Typography variant="h6" color="blue-gray" className="-mb-3">
             Password
           </Typography>
@@ -136,6 +138,9 @@ export default function RegistrationForm() {
               className: "before:content-none after:content-none",
             }}
           />
+          {errors.password && (
+            <p className="text-red-500 text-sm mt-2">{errors.password}</p>
+          )}
         </div>
         <Checkbox
           name="termsAccepted"
@@ -158,7 +163,9 @@ export default function RegistrationForm() {
           }
           containerProps={{ className: "-ml-2.5" }}
         />
-        {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+        {errors.termsAccepted && (
+          <p className="text-red-500 text-sm mt-2">{errors.termsAccepted}</p>
+        )}
         <Button type="submit" className="mt-6" fullWidth>
           Sign Up
         </Button>
