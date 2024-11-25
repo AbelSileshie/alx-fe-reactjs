@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import UserProfile from "./components/UserProfile";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
           this is an example of tailwindcss
         </p>
       </div>
+      <UserProfile />
     </>
   );
 }
