@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 const AddRecipeForm = () => {
-  // State to store form data and errors
   const [title, setTitle] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [steps, setSteps] = useState("");
@@ -47,7 +46,7 @@ const AddRecipeForm = () => {
 
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-lg shadow-lg max-w-xl mx-auto"
+        className="bg-white p-6 rounded-lg shadow-lg max-w-xl mx-auto sm:max-w-md md:max-w-lg lg:max-w-xl"
       >
         <div className="mb-4">
           <label htmlFor="title" className="block text-lg font-medium mb-2">
@@ -67,7 +66,6 @@ const AddRecipeForm = () => {
             <p className="text-red-500 text-sm mt-2">{errors.title}</p>
           )}
         </div>
-
         <div className="mb-4">
           <label
             htmlFor="ingredients"
@@ -89,8 +87,6 @@ const AddRecipeForm = () => {
             <p className="text-red-500 text-sm mt-2">{errors.ingredients}</p>
           )}
         </div>
-
-        {/* Preparation Steps */}
         <div className="mb-4">
           <label htmlFor="steps" className="block text-lg font-medium mb-2">
             Preparation Steps
@@ -109,7 +105,7 @@ const AddRecipeForm = () => {
             <p className="text-red-500 text-sm mt-2">{errors.steps}</p>
           )}
         </div>
-
+        ={" "}
         <button
           type="submit"
           className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600"
