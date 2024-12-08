@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 const AddRecipeForm = () => {
+  // State to store form data and errors
   const [title, setTitle] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [steps, setSteps] = useState("");
@@ -10,9 +11,7 @@ const AddRecipeForm = () => {
     steps: "",
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
+  const validateForm = () => {
     const newErrors = {
       title: title === "" ? "Title is required" : "",
       ingredients: ingredients === "" ? "Ingredients are required" : "",
@@ -25,11 +24,19 @@ const AddRecipeForm = () => {
 
     setErrors(newErrors);
 
-    if (!Object.values(newErrors).some((error) => error !== "")) {
+    return !Object.values(newErrors).some((error) => error !== "");
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (validateForm()) {
       const newRecipe = {
         title,
         ingredients: ingredients.split("\n"),
+        steps: steps.split("\n"),
       };
+
       console.log("New Recipe Submitted:", newRecipe);
     }
   };
@@ -61,7 +68,6 @@ const AddRecipeForm = () => {
           )}
         </div>
 
-        {/* Ingredients */}
         <div className="mb-4">
           <label
             htmlFor="ingredients"
@@ -84,6 +90,7 @@ const AddRecipeForm = () => {
           )}
         </div>
 
+        {/* Preparation Steps */}
         <div className="mb-4">
           <label htmlFor="steps" className="block text-lg font-medium mb-2">
             Preparation Steps
