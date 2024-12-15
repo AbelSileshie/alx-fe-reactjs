@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Input } from "@material-tailwind/react";
+import { button, Input } from "@material-tailwind/react";
 import { fetchUserData } from "../services/githubService";
 
 const Search = () => {
@@ -37,9 +37,9 @@ const Search = () => {
           placeholder="Enter GitHub username"
           size="lg"
         />
-        <Button type="submit" color="blue" size="lg">
+        <button type="submit" color="blue" size="lg">
           Search
-        </Button>
+        </buttonutton>
       </form>
 
       {loading && <p className="mt-4 text-center">Loading...</p>}
