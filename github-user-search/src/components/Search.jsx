@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { button, Input } from "@material-tailwind/react";
-import { fetchUserData } from "../services/githubService";
+import { Button, Input } from "@material-tailwind/react";
+import { fetchAdvancedUserData } from "../services/githubService";
 
 const Search = () => {
   const [username, setUsername] = useState("");
-  const [userData, setUserData] = useState(null);
+  const [location, setLocation] = useState("");
+  const [minRepos, setMinRepos] = useState("");
+  const [userData, setUserData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -12,13 +14,13 @@ const Search = () => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    setUserData(null);
+    setUserData([]);
 
     try {
-      const data = await fetchUserData(username);
+      const data = await fetchAdvancedUserData(username, location, minRepos);
       setUserData(data);
     } catch (err) {
-      setError("Looks like we can't find the user.");
+      setError("Looks like we can't find any users with that criteria.");
     } finally {
       setLoading(false);
     }
@@ -37,35 +39,53 @@ const Search = () => {
           placeholder="Enter GitHub username"
           size="lg"
         />
-        <button type="submit" color="blue" size="lg">
+        <Input
+          type="text"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+          placeholder="Enter Location (optional)"
+          size="lg"
+        />
+        <Input
+          type="number"
+          value={minRepos}
+          onChange={(e) => setMinRepos(e.target.value)}
+          placeholder="Minimum Repositories"
+          size="lg"
+        />
+        <Button type="submit" color="blue" size="lg">
           Search
-        </button>
+        </Button>
       </form>
 
       {loading && <p className="mt-4 text-center">Loading...</p>}
 
-      {error && (
-        <Typography className="mt-4 text-center text-red-500">
-          Looks like we cant find the user
-        </Typography>
-      )}
+      {error && <p className="mt-4 text-center text-red-500">{error}</p>}
 
-      {userData && (
-        <div className="mt-4 text-center">
-          <img
-            src={userData.avatar_url}
-            alt={userData.login}
-            className="rounded-full w-32 h-32 mx-auto"
-          />
-          <h3 className="text-xl mt-2">{userData.name || userData.login}</h3>
-          <a
-            href={userData.html_url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 mt-2 inline-block"
-          >
-            View Profile
-          </a>
+      {userData.length > 0 && (
+        <div className="mt-4">
+          {userData.map((user) => (
+            <div key={user.id} className="mb-4 text-center">
+              <img
+                src={user.avatar_url}
+                alt={user.login}
+                className="rounded-full w-32 h-32 mx-auto"
+              />
+              <h3 className="text-xl mt-2">{user.name || user.login}</h3>
+              <p className="text-sm text-gray-600">{user.location}</p>
+              <p className="text-sm text-gray-600">
+                Repositories: {user.public_repos}
+              </p>
+              <a
+                href={user.html_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-500 mt-2 inline-block"
+              >
+                View Profile
+              </a>
+            </div>
+          ))}
         </div>
       )}
     </div>
