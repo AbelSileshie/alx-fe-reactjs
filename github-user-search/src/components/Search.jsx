@@ -39,12 +39,16 @@ const Search = () => {
         />
         <button type="submit" color="blue" size="lg">
           Search
-        </buttonutton>
+        </button>
       </form>
 
       {loading && <p className="mt-4 text-center">Loading...</p>}
 
-      {error && <p className="mt-4 text-center text-red-500">{error}</p>}
+      {error && (
+        <Typography className="mt-4 text-center text-red-500">
+          Looks like we cant find the user
+        </Typography>
+      )}
 
       {userData && (
         <div className="mt-4 text-center">
