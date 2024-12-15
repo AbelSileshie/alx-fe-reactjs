@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Input } from "@material-tailwind/react";
-import { fetchAdvancedUserData } from "../services/githubService";
+import { fetchUserData } from "../services/githubService";
 
 const Search = () => {
   const [username, setUsername] = useState("");
@@ -17,7 +17,7 @@ const Search = () => {
     setUserData([]);
 
     try {
-      const data = await fetchAdvancedUserData(username, location, minRepos);
+      const data = await fetchUserData(username, location, minRepos);
       setUserData(data);
     } catch (err) {
       setError("Looks like we can't find any users with that criteria.");
